@@ -1,23 +1,22 @@
-import { Document } from "mongodb";
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
 
 export interface IEvent extends Document {
   _id: string;
   title: string;
   description?: string;
   location?: string;
+  createdAt: Date;
   imageUrl: string;
-  createdAt?: Date;
-  startDateTime?: Date;
-  endDateTime?: Date;
-  price?: string;
-  isFree?: boolean;
+  startDateTime: Date;
+  endDateTime: Date;
+  price: string;
+  isFree: boolean;
   url?: string;
-  category?: { _id: string; name: string };
-  organizer?: { _id: string; firstName: string; lastName: string };
+  category: { _id: string; name: string };
+  organizer: { _id: string; firstName: string; lastName: string };
 }
 
-const EventSChema = new Schema({
+const EventSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
   location: { type: String },
@@ -32,6 +31,6 @@ const EventSChema = new Schema({
   organizer: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
-const Event = models.Event || model("Event", EventSChema);
+const Event = models.Event || model("Event", EventSchema);
 
 export default Event;
